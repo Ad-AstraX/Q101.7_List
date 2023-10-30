@@ -90,7 +90,7 @@ public class List<ContentType> {
      */
     public boolean isEmpty() {
         //TODO 01a: Die Liste ist leer, wenn es kein erstes Element gibt.
-        return false;
+        return first == null;
     }
 
     /**
@@ -101,7 +101,7 @@ public class List<ContentType> {
      */
     public boolean hasAccess() {
         //TODO 01b: Es gibt keinen Zugriff, wenn current auf kein Element verweist.
-        return false;
+        return !(current == null);
     }
 
     /**
@@ -228,6 +228,12 @@ public class List<ContentType> {
      */
     private ListNode getPrevious(ListNode pNode) {
         //TODO 01l: Vorgänger-Node der aktuellen Node liefern.
+        if (pNode != null) {
+            ListNode targetNode = first;
+            while (!(targetNode.getNextNode() == pNode)) {
+                targetNode = targetNode.getNextNode();
+            }
+        }
         return null;
     }
 
