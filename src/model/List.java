@@ -295,9 +295,9 @@ public class List<ContentType> {
      */
     private ListNode getPrevious(ListNode pNode) {
         //TODO 01l: Vorgänger-Node der aktuellen Node liefern.
-        if (pNode != null && first != pNode) {
+        if (!isEmpty() && pNode != null && first != pNode) {
             ListNode targetNode = first;
-            while (targetNode.getNextNode() != pNode && targetNode != null) {
+            while (targetNode != null && targetNode.getNextNode() != pNode) {
                 targetNode = targetNode.getNextNode();
             }
             return targetNode;
