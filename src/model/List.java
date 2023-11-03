@@ -101,7 +101,7 @@ public class List<ContentType> {
      */
     public boolean hasAccess() {
         //TODO 01b: Es gibt keinen Zugriff, wenn current auf kein Element verweist.
-        return !(current == null);
+        return current != null;
     }
 
     /**
@@ -113,7 +113,7 @@ public class List<ContentType> {
      */
     public void next() {
         //TODO 01c: Wechsel auf die nächste Node
-        if (!isEmpty() && hasAccess() && current != last) {
+        if (hasAccess()) {
             current = current.getNextNode();
         }
     }
@@ -295,11 +295,12 @@ public class List<ContentType> {
      */
     private ListNode getPrevious(ListNode pNode) {
         //TODO 01l: Vorgänger-Node der aktuellen Node liefern.
-        if (pNode != null) {
+        if (pNode != null && first != pNode) {
             ListNode targetNode = first;
-            while (!(targetNode.getNextNode() == pNode)) {
+            while (targetNode.getNextNode() != pNode && targetNode != null) {
                 targetNode = targetNode.getNextNode();
             }
+            return targetNode;
         }
         return null;
     }
