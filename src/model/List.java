@@ -305,4 +305,17 @@ public class List<ContentType> {
         return null;
     }
 
+    public int countElements() {
+        if (!isEmpty()) {
+            int count = 0;
+            toFirst();
+            while (current != null) {
+                current = current.getNextNode();
+                count++;
+            }
+            return count;
+        }
+        return 0;
+    }
+
 }

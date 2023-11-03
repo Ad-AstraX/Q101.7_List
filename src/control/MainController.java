@@ -23,9 +23,15 @@ public class MainController {
      * @return String-Array mit den Familiennamen
      */
     public String[] showShelfContent(int index){
-        List<File> list = allShelves[index];
         //TODO 03: Ausgabe der Inhalte
-        return new String[]{"Platzhalter00", "Platzhalter01", "Platzhalter02"};
+        List<File> list = allShelves[index];
+        String[] elementsName = new String[list.countElements()];
+        list.toFirst();
+        for (int i = 0; i < elementsName.length; i++) {
+            elementsName[i] = list.getContent().getName();
+            list.next();
+        }
+        return elementsName;
     }
 
     /**
@@ -35,6 +41,9 @@ public class MainController {
      */
     public boolean sort(int index){
         //TODO 07: Sortieren einer Liste.
+        if (index == 0 || index == 1) {
+
+        }
         return false;
     }
 
@@ -46,6 +55,10 @@ public class MainController {
      */
     public boolean appendFromTo(int from, int to){
         //TODO 04: Die Objekte einer Liste an eine andere anhängen und dabei die erste Liste leeren.
+        if ((from == 0 || from == 1) && (to == 0 || to == 1)) {
+            allShelves[to].concat(allShelves[from]);
+            return true;
+        }
         return false;
     }
 
@@ -58,6 +71,10 @@ public class MainController {
      */
     public boolean appendANewFile(int index, String name, String phoneNumber){
         //TODO 02: Hinzufügen einer neuen Akte am Ende der Liste.
+        if ((index == 0 || index == 1) && name != null && phoneNumber != null) {
+            allShelves[index].append(new File(name, phoneNumber));
+            return true;
+        }
         return false;
     }
 
