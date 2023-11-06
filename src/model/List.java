@@ -305,7 +305,7 @@ public class List<ContentType> {
         return null;
     }
 
-    public int countElements() {
+    public int count() {
         if (!isEmpty()) {
             int count = 0;
             toFirst();

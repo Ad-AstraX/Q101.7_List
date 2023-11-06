@@ -25,7 +25,7 @@ public class MainController {
     public String[] showShelfContent(int index){
         //TODO 03: Ausgabe der Inhalte
         List<File> list = allShelves[index];
-        String[] elementsName = new String[list.countElements()];
+        String[] elementsName = new String[list.count()];
         list.toFirst();
         for (int i = 0; i < elementsName.length; i++) {
             elementsName[i] = list.getContent().getName();
@@ -77,7 +77,7 @@ public class MainController {
      */
     public boolean appendFromTo(int from, int to){
         //TODO 04: Die Objekte einer Liste an eine andere anhängen und dabei die erste Liste leeren.
-        if ((from == 0 || from == 1) && (to == 0 || to == 1)) {
+        if ((from >= 0 && from < allShelves.length) && (to >= 0 && to < allShelves.length)) {
             allShelves[to].concat(allShelves[from]);
             return true;
         }
@@ -137,6 +137,21 @@ public class MainController {
      */
     public int[] search(String name){
         //TODO 05: Suchen in einer Liste.
+        if (name != null) {
+            int shelfCount = 0;
+            for (List<File> list : allShelves) {
+                list.toFirst();
+                int placeCount = 0;
+                while (list.hasAccess()) {
+                    if (list.getContent().getName().equals(name)) {
+                        return new int[] {shelfCount, placeCount};
+                    }
+                    list.next();
+                    placeCount++;
+                }
+                shelfCount++;
+            }
+        }
         return new int[]{-1,-1};
     }
 
@@ -148,6 +163,17 @@ public class MainController {
      */
     public String[] remove(int shelfIndex, int fileIndex){
         //TODO 06: Entfernen aus einer Liste.
+        if ((shelfIndex >= 0 && shelfIndex < allShelves.length) && (fileIndex >= 0 && fileIndex < allShelves[shelfIndex].count())) {
+            allShelves[shelfIndex].toFirst();
+            int count = 0;
+            while (allShelves[shelfIndex].hasAccess() && count < fileIndex) {
+                allShelves[shelfIndex].next();
+                count++;
+            }
+            File removedFile = allShelves[shelfIndex].getContent();
+            allShelves[shelfIndex].remove();
+            return new String[] {removedFile.getName(), removedFile.getPhoneNumber()};
+        }
         return new String[]{"Nicht vorhanden","Nicht vorhanden"};
     }
 
