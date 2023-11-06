@@ -48,26 +48,26 @@ public class MainController {
     }
 
     /*funktion quicksort (li, re)
-  if li < re
+        if li < re
             t = teilen(li, re)
-    quicksort(li, t)
-    quicksort(t+1, re)
-    end
-            end
+            quicksort(li, t)
+            quicksort(t+1, re)
+        end
+      end
 
     funktion teilen(li, re)
-    i = li – 1
-    j = re + 1
-    pivot = Liste[(li + re) / 2]
-            while Liste[i] < pivot
-    i++
+        i = li – 1
+        j = re + 1
+        pivot = Liste[(li + re) / 2]
+        while Liste[i] < pivot
+            i++
             while Liste [j] > pivot
-    j++
-            if (i < j)
-    int a = Liste[i]
-    Liste[i] = Liste[j]
-    Liste[j] = a
-  else return j*/
+                j++
+                if (i < j)
+                    int a = Liste[i]
+                    Liste[i] = Liste[j]
+                    Liste[j] = a
+                else return j*/
 
     /**
      * Die gesammte Aktensammlung eines Regals wird zur Aktensammlung eines anderen Regals gestellt.
@@ -110,7 +110,21 @@ public class MainController {
     public boolean insertANewFile(int index, String name, String phoneNumber){
         //TODO 08: Einfügen einer neuen Akte an die richtige Stelle innerhalb der Liste.
         if ((index == 0 || index == 1) && name != null && phoneNumber != null) {
-            allShelves[index].append(new File(name, phoneNumber));
+            allShelves[index].toFirst();
+            boolean flag = false;
+            while (allShelves[index].hasAccess()) {
+                for (int i = 0; i < name.toCharArray().length; i++) {
+                    if (allShelves[index].getContent().getName().toCharArray()[i] < name.toCharArray()[i]) {
+                        flag = true;
+                        break;
+                    }
+                }
+                if (flag) {
+                    break;
+                }
+                allShelves[index].next();
+            }
+            allShelves[index].insert(new File(name, phoneNumber));
             return true;
         }
         return false;
