@@ -172,7 +172,7 @@ public class MainController {
         File removedFile = allShelves[shelfIndex].getContent();
         allShelves[shelfIndex].remove();
         return new String[] {removedFile.getName(), removedFile.getPhoneNumber()};
-    }
+    }// test
 
     /**
      * Es werden 14 zufällige Akten angelegt und zufällig den Regalen hinzugefügt.
